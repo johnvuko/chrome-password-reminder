@@ -55,6 +55,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "input#signInSubmit"
 		},
+		basecamp: {
+			url: "https://launchpad.37signals.com/basecamp/signin",
+			username: "input[name='username']",
+			password: "input[name='password']",
+			submit: "input[type='image']"
+		},
 		bitbucket: {
 			url: "https://bitbucket.org/account/signin/?next=/",
 			username: "input[name='username']",
