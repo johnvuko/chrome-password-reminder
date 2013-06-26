@@ -97,6 +97,12 @@ function loadServices(){
 			password: "input[name='session_password']",
 			submit: "input[type='submit']"
 		},
+		paypal: {
+			url: "https://www.paypal.com/webapps/mpp/accueil",
+			username: "input[name='login_email']",
+			password: "input[name='login_password']",
+			submit: "input[name='submit.x']"
+		},
 		twitter: {
 			url: "https://twitter.com/",
 			username: "input[name='session[username_or_email]']",

@@ -3,7 +3,7 @@
 
 	"name": "Password Reminder",
 	"description": "Auto connect to your favorite services",
-	"version": "1.0.1",
+	"version": "1.0.2",
 
 	"homepage_url" : "https://github.com/jonathantribouharet/chrome-password-reminder",
 
@@ -37,6 +37,7 @@
 		"https://github.com/",
 		"https://accounts.google.com/",
 		"https://www.ovh.com/",
+		"https://www.paypal.com/",
 		"https://twitter.com/"
 	]
 }
