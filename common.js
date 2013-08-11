@@ -67,6 +67,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "button[type='submit']"
 		},
+		dropbox: {
+			url: "https://www.dropbox.com/login",
+			username: "input[name='login']",
+			password: "input[name='password']",
+			submit: "input[type='submit']"
+		},
 		ebay: {
 			url: "https://signin.ebay.com/ws/eBayISAPI.dll?SellItem",
 			username: "input[name='userid']",
@@ -79,6 +85,12 @@ function loadServices(){
 			password: "input[name='pass']",
 			submit: "input[type='submit']"
 		},
+		foursquare: {
+			url: "https://foursquare.com/login/",
+			username: "input[name='emailOrPhone']",
+			password: "input[name='password']",
+			submit: "input[type='submit']"
+		},
 		github: {
 			url: "https://github.com/login",
 			username: "input[name='login']",
@@ -86,7 +98,7 @@ function loadServices(){
 			submit: "input[type='submit']"
 		},
 		google: {
-			url: "https://accounts.google.com/ServiceLogin?hl=fr&continue=http://www.google.com/",
+			url: "https://accounts.google.com/ServiceLogin?continue=https://www.google.com/",
 			username: "input[name='Email']",
 			password: "input[name='Passwd']",
 			submit: "input[name='signIn']"
