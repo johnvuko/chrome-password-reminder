@@ -103,6 +103,12 @@ function loadServices(){
 			password: "input[name='Passwd']",
 			submit: "input[name='signIn']"
 		},
+		mailchimp: {
+			url: "https://login.mailchimp.com/",
+			username: "input[name='username']",
+			password: "input[name='password']",
+			submit: "button[type='submit']"
+		},
 		ovh: {
 			url: "https://www.ovh.com/managerv3/",
 			username: "input[name='session_nic']",

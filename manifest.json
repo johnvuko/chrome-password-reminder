@@ -3,7 +3,7 @@
 
 	"name": "Password Reminder",
 	"description": "Auto connect to your favorite services",
-	"version": "1.0.3",
+	"version": "1.0.4",
 
 	"homepage_url" : "https://github.com/jonathantribouharet/chrome-password-reminder",
 
@@ -29,17 +29,6 @@
 	"permissions": [
 		"webNavigation",
 		"storage",
-		"https://www.amazon.com/",
-		"https://launchpad.37signals.com/",
-		"https://bitbucket.org/",
-		"https://www.dropbox.com/",
-		"https://signin.ebay.com/",
-		"https://www.facebook.com/",
-		"https://foursquare.com/",
-		"https://github.com/",
-		"https://accounts.google.com/",
-		"https://www.ovh.com/",
-		"https://www.paypal.com/",
-		"https://twitter.com/"
+		"<all_urls>"
 	]
 }
