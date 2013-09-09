@@ -34,7 +34,7 @@ a{
 	cursor: pointer;
 }
 
-li:hover{
+li:hover, a:hover{
 	background: linear-gradient(to bottom, #adc1f5 0%, #1e5eec 100%);
 }
 

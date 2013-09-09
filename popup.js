@@ -9,7 +9,13 @@ function onCommonLoaded(){
 	var backgroundPage = chrome.extension.getBackgroundPage();
 	tabIds = backgroundPage.tabIds;
 
+	setOptionsURL();
 	addLoginsToHTML();
+}
+
+function setOptionsURL(){
+	var anchor = document.getElementsByTagName('a')[0];
+	anchor.setAttribute('href', chrome.extension.getURL("options.html"));
 }
 
 function addLoginsToHTML(){
