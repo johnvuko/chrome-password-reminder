@@ -126,6 +126,12 @@ function loadServices(){
 			username: "input[name='session[username_or_email]']",
 			password: "input[name='session[password]']",
 			submit: ".signin button[type='submit']"
+		},
+		uxpin: {
+			url: "https://app.uxpin.com/",
+			username: "input[name='login']",
+			password: "input[name='password']",
+			submit: "#loginform_button1"
 		}
 	};
 }
