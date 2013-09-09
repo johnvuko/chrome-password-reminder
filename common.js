@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function addLogin(login){
-	login.id = logins.length + 1;
+	login.id = logins[logins.length - 1].id + 1;
 	logins.push(login);
 	storage.set({'logins': logins});
 }
