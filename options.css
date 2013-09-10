@@ -20,18 +20,32 @@ ul{
 li, a{
 	height: 22px;
 	line-height: 22px;
-	width: 250px;
+}
+
+li{
+	width: 295px;
 }
 
 a{
-	display: block;
-	text-align: right;
-	width: 240px;
-	padding-right: 10px;
-	
 	text-decoration: none;
 	color: #1a1a1a;
 	cursor: pointer;
+}
+
+a.label{
+	display: inline-block;
+	text-align: right;
+	width: 240px;
+	padding-right: 10px;
+}
+
+a[data-action]{
+	display: inline-block;
+	float: right;
+	width: 20px;
+	text-align: center;
+
+	font-size: 18px;
 }
 
 li:hover{

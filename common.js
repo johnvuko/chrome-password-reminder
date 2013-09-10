@@ -17,10 +17,10 @@ function addLogin(login){
 }
 
 function removeLoginById(login_id){
-	for(var index = 0; index < logins.length; ++index){
-		var current_login = logins[index];
+	for(var i = 0; i < logins.length; ++i){
+		var current_login = logins[i];
 		if(current_login.id == login_id){
-			logins.splice(index, 1);
+			logins.splice(i, 1);
 			break;
 		}
 	}
@@ -30,8 +30,8 @@ function removeLoginById(login_id){
 function findLoginById(login_id){
 	var result = null;
 
-	for(var index = 0; index < logins.length; ++index){
-		var current_login = logins[index];
+	for(var i = 0; i < logins.length; ++i){
+		var current_login = logins[i];
 		if(current_login.id == login_id){
 			result = current_login;
 			break;
@@ -39,6 +39,26 @@ function findLoginById(login_id){
 	}
 
 	return result;
+}
+
+/******************/
+
+function getLoginPosition(login_id){
+	for(var i = 0; i < logins.length; ++i){
+		if(logins[i].id == login_id){
+			return i;
+		}
+	}
+}
+
+function moveLoginToPosition(login_id, position){
+	var current_position = getLoginPosition(login_id);
+	var login = logins[current_position];
+	
+	logins.splice(current_position, 1);
+	logins.splice(position, 0, login);
+
+	storage.set({'logins': logins});
 }
 
 /******************/

@@ -58,6 +58,31 @@ function onClick(e){
 	}
 }
 
+function onMove(e){
+	e.preventDefault();
+
+	var login_id = this.getAttribute('data-login-id');
+	var position = getLoginPosition(login_id);
+
+	if(this.getAttribute('data-action') == 'up'){
+		if(position > 0){
+			moveLoginToPosition(login_id, position - 1);
+		}
+	}
+	else{
+		if(position < logins.length - 1){
+			moveLoginToPosition(login_id, position + 1);
+		}
+	}
+
+	refreshList();
+}
+
+function refreshList(){
+	loginsList.innerHTML = '';
+	addLoginsToHTML();
+}
+
 function addServiceToHTML(service){
 	var element = document.createElement('option');
 	element.value = service;
@@ -71,9 +96,11 @@ function addLoginToHTML(login){
 	var label = (login.label ? service + ' - ' + login.label : service);
 
 	var element = document.createElement('li');
-	element.innerHTML = "<a data-login-id='" + login.id + "'><img src='img/" + service + ".png' />" + label + "</a>";
+	element.innerHTML = "<a class='label' data-login-id='" + login.id + "'><img src='img/" + service + ".png' />" + label + "</a> <a data-login-id='" + login.id + "' data-action='down'>-</a> <a data-login-id='" + login.id + "' data-action='up'>+</a>";
 
 	element.querySelector('a[data-login-id]').addEventListener('click', onClick);
+	element.querySelector('a[data-action="down"]').addEventListener('click', onMove);
+	element.querySelector('a[data-action="up"]').addEventListener('click', onMove);
 
 	loginsList.appendChild(element);	
 }
