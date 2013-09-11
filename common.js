@@ -3,6 +3,7 @@
 var storage = null;
 var services = null;
 var logins = null;
+var lastLoginId = 0;
 
 document.addEventListener('DOMContentLoaded', function(){
 	loadStorage();
@@ -11,8 +12,10 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function addLogin(login){
-	login.id = logins[logins.length - 1].id + 1;
+	lastLoginId++;
+	login.id = lastLoginId;
 	logins.push(login);
+
 	storage.set({'logins': logins});
 }
 
@@ -24,6 +27,7 @@ function removeLoginById(login_id){
 			break;
 		}
 	}
+
 	storage.set({'logins': logins});
 }
 
@@ -39,6 +43,16 @@ function findLoginById(login_id){
 	}
 
 	return result;
+}
+
+function rebuildLoginsId(){
+	for(var i = 0; i < logins.length; ++i){
+		var login = logins[i];
+		login.id = i;
+		lastId = i;
+	}
+
+	storage.set({'logins': logins});
 }
 
 /******************/
@@ -168,6 +182,11 @@ function loadLogins(){
 		if(!logins){
 			logins = [];
 		}
+
+		for(var i = 0; i < logins.length; ++i){
+			lastLoginId = Math.max(lastLoginId, logins[i].id);
+		}
+
 		onCommonLoaded();
 	});
 }
