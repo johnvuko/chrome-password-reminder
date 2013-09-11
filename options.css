@@ -3,8 +3,7 @@ a:focus {
 }
 
 body{
-	width: 250px;
-	margin: 4px 0;
+	width: 100%;
 
 	font-family: 'Helvetica';
 	font-size: 10.5pt;
@@ -13,7 +12,37 @@ body{
 	user-select: none;
 }
 
+/**************/
+
+.content{
+	margin: 5px 15px;
+}
+
+form{
+	margin-top: 20px;
+}
+
+label, input, select{
+	display: inline-block;
+	width: 200px;
+	margin: 10px 0;
+
+	text-align: left;
+}
+
+input, select{
+	height: 20px;
+}
+
+button{
+	height: 30px;
+	width: 100px;
+}
+
+/**************/
+
 ul{
+	margin-top: 50px;
 	list-style: none;
 }
 

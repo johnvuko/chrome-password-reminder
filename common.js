@@ -87,6 +87,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "button[type='submit']"
 		},
+		box: {
+			url: "https://app.box.com/login/",
+			username: "input[name='login']",
+			password: "input[name='password']",
+			submit: "button#login_button_credentials"
+		},
 		dropbox: {
 			url: "https://www.dropbox.com/login",
 			username: "input[name='login']",
