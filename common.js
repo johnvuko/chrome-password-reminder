@@ -149,6 +149,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "button[type='submit']"
 		},
+		marqueed: {
+			url: "https://www.marqueed.com/users/sign_in",
+			username: "input[name='user[email]']",
+			password: "input[name='user[password]']",
+			submit: "input[type='submit'].signin-submit"
+		},
 		ovh: {
 			url: "https://www.ovh.com/managerv3/",
 			username: "input[name='session_nic']",
