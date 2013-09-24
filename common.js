@@ -143,6 +143,12 @@ function loadServices(){
 			password: "input[name='Passwd']",
 			submit: "input[name='signIn']"
 		},
+		heroku: {
+			url: "https://id.heroku.com/login",
+			username: "input[name='email']",
+			password: "input[name='password']",
+			submit: "input[type='submit']"
+		},
 		mailchimp: {
 			url: "https://login.mailchimp.com/",
 			username: "input[name='username']",
