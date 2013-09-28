@@ -119,6 +119,12 @@ function loadServices(){
 			password: "input[name='pass']",
 			submit: "input[name='sgnBt']"
 		},
+		evernote: {
+			url: "https://www.evernote.com/Login.action?targetUrl=%2FHome.action",
+			username: "input[name='username']",
+			password: "input[name='password']",
+			submit: "input[name='login']"
+		},
 		facebook: {
 			url: "https://www.facebook.com/",
 			username: "input[name='email']",
