@@ -7,10 +7,24 @@ function onCommonLoaded(){
 	servicesList = document.querySelector("[name='service']");
 	loginsList = document.getElementById("services");
 
+	setOptions();
+
 	addServicesToHTML();
 	addLoginsToHTML();
 
 	document.querySelector('form').addEventListener('submit', onSubmit);
+}
+
+function setOptions(){
+	var checkbox = document.querySelector('[data-action="keep-order"]');
+
+	if(options.keep_order){
+		checkbox.checked = true;
+	}
+
+	checkbox.addEventListener('change', function(){
+		optionsKeepOrder(checkbox.checked, refreshList);
+	});
 }
 
 function addServicesToHTML(){
@@ -42,7 +56,7 @@ function onSubmit(e){
 		};
 		
 		addLogin(login);
-		addLoginToHTML(login);
+		refreshList();
 		document.querySelector("form").reset();
 	}
 }

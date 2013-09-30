@@ -22,7 +22,7 @@ form{
 	margin-top: 20px;
 }
 
-label, input, select{
+form label, form input, form select{
 	display: inline-block;
 	width: 200px;
 	margin: 10px 0;
@@ -30,7 +30,7 @@ label, input, select{
 	text-align: left;
 }
 
-input, select{
+form input, form select{
 	height: 20px;
 }
 

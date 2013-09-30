@@ -4,6 +4,7 @@ var storage = null;
 var services = null;
 var logins = null;
 var lastLoginId = 0;
+var options = null;
 
 document.addEventListener('DOMContentLoaded', function(){
 	loadStorage();
@@ -16,7 +17,12 @@ function addLogin(login){
 	login.id = lastLoginId;
 	logins.push(login);
 
-	storage.set({'logins': logins});
+	if(options.keep_order){
+		reorderLogins();
+	}
+	else{
+		storage.set({'logins': logins});
+	}
 }
 
 function removeLoginById(login_id){
@@ -49,10 +55,43 @@ function rebuildLoginsId(){
 	for(var i = 0; i < logins.length; ++i){
 		var login = logins[i];
 		login.id = i;
-		lastId = i;
 	}
 
 	storage.set({'logins': logins});
+}
+
+function optionsKeepOrder(value, callback){
+	options.keep_order = value;
+	storage.set({'options': options});
+
+	if(options.keep_order){
+		reorderLogins();
+		callback();
+	}
+}
+
+function reorderLogins(){
+	logins.sort(function(a, b){
+	    var textA = a.service.toLowerCase();
+	    var textB = b.service.toLowerCase();
+
+	    if(textA == textB){
+	    	if(!a.label){
+	    		return -1;
+	    	}
+	    	else if(!b.label){
+	    		return 1;
+	    	}
+
+	    	textA = a.label.toLowerCase();
+	    	textB = b.label.toLowerCase();
+	    	return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+	    }
+
+	    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+	});
+
+	rebuildLoginsId();
 }
 
 /******************/
@@ -201,7 +240,13 @@ function loadServices(){
 }
 
 function loadLogins(){
-	storage.get('logins', function(result){
+	storage.get(['logins', 'options'], function(result){
+		options = result.options;
+		if(!options){
+			options = {};
+		}
+
+
 		logins = result.logins;
 		if(!logins){
 			logins = [];
