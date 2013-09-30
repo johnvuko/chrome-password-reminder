@@ -89,6 +89,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "input#signInSubmit"
 		},
+		bananatag: {
+			url: "https://bananatag.com/login",
+			username: "input[name='txtEmail']",
+			password: "input[name='txtPassword']",
+			submit: "a[data-action='login']"
+		},
 		basecamp: {
 			url: "https://launchpad.37signals.com/basecamp/signin",
 			username: "input[name='username']",
