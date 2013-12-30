@@ -128,6 +128,12 @@ function loadServices(){
 			password: "input[name='password']",
 			submit: "input#signInSubmit"
 		},
+		asana: {
+			url: "https://app.asana.com/",
+			username: "input[name='e']",
+			password: "input[name='p']",
+			submit: "#submit_button"
+		},
 		bananatag: {
 			url: "https://bananatag.com/login",
 			username: "input[name='txtEmail']",
@@ -154,8 +160,8 @@ function loadServices(){
 		},
 		dropbox: {
 			url: "https://www.dropbox.com/login",
-			username: "input[name='login']",
-			password: "input[name='password']",
+			username: "input[name='login_email']",
+			password: "input[name='login_password']",
 			submit: "input[type='submit']"
 		},
 		ebay: {
@@ -211,6 +217,12 @@ function loadServices(){
 			username: "input[name='user[email]']",
 			password: "input[name='user[password]']",
 			submit: "input[type='submit'].signin-submit"
+		},
+		online: {
+			url: "https://console.online.net/en/login",
+			username: "input#username",
+			password: "input#password",
+			submit: "#login input[type='submit']"
 		},
 		ovh: {
 			url: "https://www.ovh.com/managerv3/",
