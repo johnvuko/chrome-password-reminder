@@ -219,7 +219,7 @@ function loadServices(){
 			submit: "input[type='submit'].signin-submit"
 		},
 		online: {
-			url: "https://console.online.net/en/login",
+			url: "https://console.online.net/fr/login",
 			username: "input#username",
 			password: "input#password",
 			submit: "#login input[type='submit']"
