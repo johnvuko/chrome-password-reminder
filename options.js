@@ -4,6 +4,8 @@ var servicesList = null;
 var loginsList = null;
 
 function onCommonLoaded(){
+	translate();
+
 	servicesList = document.querySelector("[name='service']");
 	loginsList = document.getElementById("services");
 
@@ -13,6 +15,16 @@ function onCommonLoaded(){
 	addLoginsToHTML();
 
 	document.querySelector('form').addEventListener('submit', onSubmit);
+}
+
+function translate(){
+	var elements = document.querySelectorAll('[jt-tr]');
+	for(var i  = 0; i < elements.length; ++i){
+		var element = elements[i];
+
+		var text = chrome.i18n.getMessage(element.attributes['jt-tr'].value);
+		element.textContent = text;
+	}
 }
 
 function setOptions(){
@@ -64,7 +76,7 @@ function onSubmit(e){
 function onClick(e){
 	e.preventDefault();
 
-	if(confirm('Remove this element?')){
+	if(confirm(chrome.i18n.getMessage('removeElement'))){
 		var login_id = this.getAttribute('data-login-id');
 
 		removeLoginById(login_id);

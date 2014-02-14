@@ -1,0 +1,10 @@
+{
+	"removeElement": {  "message" : "Supprimer cet élément?" },
+
+	"service": { "message" : "Service" },
+	"label": { "message" : "Titre" },
+	"username": { "message" : "Identifiant*" },
+	"password": { "message" : "Mot de passe*" },
+	"add": { "message" : "Ajouter" },
+	"keepServicesInOrder": { "message" : "Trier par ordre alphabétique" }
+}

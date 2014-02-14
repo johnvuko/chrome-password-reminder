@@ -3,7 +3,7 @@
 
 	"name": "Password Reminder",
 	"description": "Auto connect to your favorite services",
-	"version": "1.0.12",
+	"version": "1.1.0",
 
 	"homepage_url" : "https://github.com/jonathantribouharet/chrome-password-reminder",
 
@@ -32,5 +32,6 @@
 		"<all_urls>"
 	],
 
-	"author": "Jonathan Tribouharet"
+	"author": "Jonathan Tribouharet",
+	"default_locale": "en"
 }
