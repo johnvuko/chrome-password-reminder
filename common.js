@@ -247,6 +247,12 @@ function loadServices(){
 			username: "input[name='login']",
 			password: "input[name='password']",
 			submit: "#loginform_button1"
+		},
+		yahoo: {
+			url: "https://login.yahoo.com/config/login",
+			username: "input[name='login']",
+			password: "input[name='passwd']",
+			submit: "button[type='submit']"
 		}
 	};
 }
