@@ -1,51 +1,61 @@
 "use strict";
 
-var loginsList;
-var tabIds;
+var loginsList = null;
 
-function onCommonLoaded(){
-	loginsList = document.getElementById("services");
+var passwordManager = null;
+var tabIds = null;
+
+document.addEventListener('DOMContentLoaded', function(){
+	passwordManager = new JTPasswordManager(onDocumentLoaded);
+});
+
+function onDocumentLoaded(){
+	loginsList = document.querySelector("#services");
 
 	var backgroundPage = chrome.extension.getBackgroundPage();
 	tabIds = backgroundPage.tabIds;
 
-	setOptionsURL();
-	addLoginsToHTML();
+	configureOptionsButton();
+	loadLogins();
 }
 
-function setOptionsURL(){
-	var anchor = document.getElementsByTagName('a')[0];
-	anchor.setAttribute('href', chrome.extension.getURL("options.html"));
+/**************************************/
+
+function configureOptionsButton(){
+	var button = document.getElementsByTagName('a')[0];
+	button.setAttribute('href', chrome.extension.getURL("options.html"));
 }
 
-function addLoginsToHTML(){
-	for(var index in logins){
-		addLoginToHTML(logins[index]);
+function loadLogins(){
+	for(var i = 0; i < passwordManager.logins.length; ++i){	
+		addLoginToHTML(passwordManager.logins[i]);
 	}
 }
 
-function onClick(e){
-	e.preventDefault();
-
-	var login_id = this.getAttribute('data-login-id');
-
-	var login = findLoginById(login_id);
-	var service = services[login.service];
-	
-	chrome.tabs.create({ url: service.url }, function(tab){
-		tabIds[tab.id] = { service: service, login: login };
-	});
-}
-
 function addLoginToHTML(login){
-	var service = login.service;
-	var label = (login.label ? service + ' - ' + login.label : service);
+	var service = passwordManager.findServiceById(login.serviceId);
+	var label = (login.label ? service.name + ' - ' + login.label : service.name);
 
 	var element = document.createElement('li');
-	element.innerHTML = "<a data-login-id='" + login.id + "'><img src='img/" + service + ".png' />" + label + "</a>";
+	element.innerHTML = "<a data-login-id='" + login.id + "'><img src='" + service.imageUrl + "' />" + label + "</a>";
 
-	element.querySelector('a[data-login-id]').addEventListener('click', onClick);
+	element.querySelector('a[data-login-id]').addEventListener('click', onClickOnLoginElement);
 
 	loginsList.appendChild(element);	
 }
 
+function onClickOnLoginElement(e){
+	e.preventDefault();
+
+	var loginId = this.getAttribute('data-login-id');
+
+	var login = passwordManager.findLoginById(loginId);
+	var service = passwordManager.findServiceById(login.serviceId);
+	
+	chrome.tabs.create({ url: service.url }, function(tab){
+		tabIds[tab.id] = {
+			service: service,
+			login: login
+		};
+	});
+}

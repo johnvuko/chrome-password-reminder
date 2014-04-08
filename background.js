@@ -18,15 +18,15 @@ function initBackground(){
 
 function codeToInject(service, login){
 	return '\
-	function __autoLogin(){\
-		var username = document.querySelector("' + service.username + '");\
-		var password = document.querySelector("' + service.password + '");\
-		var submit = document.querySelector("' + service.submit + '");\
+	function __JTautoLogin(){\
+		var username = document.querySelector("' + service.usernameSelector + '");\
+		var password = document.querySelector("' + service.passwordSelector + '");\
+		var submit = document.querySelector("' + service.submitSelector + '");\
 		username.value = "' + escape(login.username) + '";\
 		password.value = "' + escape(login.password) + '";\
 		submit.click();\
 	}\
-	__autoLogin();';
+	__JTautoLogin();';
 }
 
 initBackground();

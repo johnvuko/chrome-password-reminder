@@ -1,116 +1,73 @@
-a:focus {
-    outline: none;
+.title{
+	height: 80px;
+}
+.title img{
+	height: 38px;
+	margin-bottom: 5px;
 }
 
-body{
-	width: 100%;
+/********************/
 
-	font-family: 'Helvetica';
-	font-size: 10.5pt;
-	
-	-webkit-user-select: none;
-	user-select: none;
+.tab-pane{
+	margin-top: 15px;
 }
 
-/**************/
+/********************/
 
-.content{
-	margin: 5px 15px;
+.jt-cell{
+	height: 130px;
 }
 
-form{
-	margin-top: 20px;
-}
-
-form label, form input, form select{
-	display: inline-block;
-	width: 200px;
-	margin: 10px 0;
-
-	text-align: left;
-}
-
-form input, form select{
-	height: 20px;
-}
-
-button{
-	position: absolute;
-	left: 325px;
-
-	height: 30px;
-	width: 100px;
-
-	background-color: rgb(242, 242, 242);
-	border: 1px solid rgb(192, 192, 192);
+.jt-cell:hover{
+	border: 1px solid #ccc;
 	border-radius: 5px;
 }
 
-button:hover{
-	background-color: rgb(252, 252, 252);
-	border: 1px solid rgb(202, 202, 202);
+.jt-cell img{
+	display: block;
+	height: 50px;
+	margin: 20px auto 10px auto;
 }
 
-/**************/
-
-#need_more{
-	margin-top: 35px;
-
-	font-size: 12px;
-}
-
-#need_more a:hover{
-	color: blue;
-}
-
-/**************/
-
-ul{
-	margin-top: 20px;
-	list-style: none;
-}
-
-li, a{
-	height: 22px;
-	line-height: 22px;
-}
-
-li{
-	width: 295px;
-}
-
-a{
-	text-decoration: none;
-	color: #1a1a1a;
-	cursor: pointer;
-}
-
-a.label{
-	display: inline-block;
-	text-align: right;
-	width: 240px;
-	padding-right: 10px;
-}
-
-a[data-action]{
-	display: inline-block;
-	float: right;
-	width: 20px;
+.jt-cell a{
+	display: block;
 	text-align: center;
-
-	font-size: 18px;
+	color: black;
 }
 
-li:hover{
-	background: linear-gradient(to bottom, #adc1f5 0%, #1e5eec 100%);
+.jt-cell:hover a{
+	color: #2a6496;
+	text-decoration: none;
 }
 
-a:hover{
-	color: #f0f0f0;
+
+.jt-cell .jt-remove{
+	opacity: 0;
+	margin-top: 7px;
+	float: right;
+	color: #ccc;
 }
 
-a img{
-	float: left;
-	height: 18px;
-	margin: 2px 10px;
+.jt-cell:hover .jt-remove{
+	opacity: 1;
+
+}
+
+.jt-cell .jt-remove:hover{
+	color: rgb(213, 61, 41);
+}
+
+/********************/
+
+.jt-form{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+
+	padding: 10px 25px;
+}
+
+/********************/
+
+#footer{
+	height: 40px;
 }

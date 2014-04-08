@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 
 	"name": "Password Reminder",
-	"description": "Auto connect to your favorite services",
-	"version": "1.1.0",
+	"description": "Quickly connect to your favorite services",
+	"version": "1.2.0",
 
 	"homepage_url" : "https://github.com/jonathantribouharet/chrome-password-reminder",
 

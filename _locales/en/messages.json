@@ -1,10 +1,21 @@
 {
 	"removeElement": {  "message" : "Remove this element?" },
 
-	"service": { "message" : "Service" },
-	"label": { "message" : "Label" },
-	"username": { "message" : "Username*" },
-	"password": { "message" : "Password*" },
-	"add": { "message" : "Add" },
-	"keepServicesInOrder": { "message" : "Keep services in order" }
+	"tab_login": { "message": "Logins" },
+	"tab_service": { "message": "Services" },
+	"tab_other": { "message": "Other" },
+	
+	"form_login_service": { "message": "Service" },
+	"form_login_label": { "message": "Label" },
+	"form_login_username": { "message": "Username*" },
+	"form_login_password": { "message": "Password*" },
+	"form_login_add": { "message": "Submit" },
+
+	"form_service_name": { "message": "Name*" },
+	"form_service_url": { "message": "URL*" },
+	"form_service_imageUrl": { "message": "Image URL" },
+	"form_service_usernameSelector": { "message": "Username selector*" },
+	"form_service_passwordSelector": { "message": "Password selector*" },
+	"form_service_submitSelector": { "message": "Submit button selector*" },
+	"form_service_add": { "message": "Submit" }
 }

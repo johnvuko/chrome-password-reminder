@@ -1,10 +1,21 @@
 {
 	"removeElement": {  "message" : "Supprimer cet élément?" },
 
-	"service": { "message" : "Service" },
-	"label": { "message" : "Titre" },
-	"username": { "message" : "Identifiant*" },
-	"password": { "message" : "Mot de passe*" },
-	"add": { "message" : "Ajouter" },
-	"keepServicesInOrder": { "message" : "Trier par ordre alphabétique" }
+	"tab_login": { "message": "Identifiants" },
+	"tab_service": { "message": "Services" },
+	"tab_other": { "message": "Autre" },
+	
+	"form_login_service": { "message": "Service" },
+	"form_login_label": { "message": "Titre" },
+	"form_login_username": { "message": "Pseudo*" },
+	"form_login_password": { "message": "Mot de passe*" },
+	"form_login_add": { "message": "Ajouter cet identifiant" },
+
+	"form_service_name": { "message": "Nom du service*" },
+	"form_service_url": { "message": "URL*" },
+	"form_service_imageUrl": { "message": "Image URL" },
+	"form_service_usernameSelector": { "message": "Pseudo selecteur*" },
+	"form_service_passwordSelector": { "message": "Mot de passe selecteur*" },
+	"form_service_submitSelector": { "message": "Bouton selecteur*" },
+	"form_service_add": { "message": "Ajouter ce service" }
 }

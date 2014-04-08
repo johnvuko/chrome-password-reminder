@@ -1,23 +1,40 @@
 "use strict";
 
+var servicesSelect = null;
 var servicesList = null;
 var loginsList = null;
 
-function onCommonLoaded(){
-	translate();
+var serviceForm = null;
+var loginForm = null;
 
-	servicesList = document.querySelector("[name='service']");
-	loginsList = document.getElementById("services");
+var passwordManager = null;
 
-	setOptions();
+document.addEventListener('DOMContentLoaded', function(){
+	passwordManager = new JTPasswordManager(onDocumentLoaded);
+});
 
-	addServicesToHTML();
-	addLoginsToHTML();
+function onDocumentLoaded(){
+	translateText();
 
-	document.querySelector('form').addEventListener('submit', onSubmit);
+	servicesSelect = document.querySelector("[name='service_id']");
+	servicesList = document.querySelector("#services");
+	loginsList = document.querySelector("#logins");
+
+	serviceForm = document.querySelector(".service-form");
+	loginForm = document.querySelector(".login-form");
+
+	serviceForm.addEventListener('submit', onSubmitService);
+	loginForm.addEventListener('submit', onSubmitLogin);
+
+	loadServices();
+	loadLogins();
+
+	configureExportButton();
 }
 
-function translate(){
+/**************************************/
+
+function translateText(){
 	var elements = document.querySelectorAll('[jt-tr]');
 	for(var i  = 0; i < elements.length; ++i){
 		var element = elements[i];
@@ -27,110 +44,172 @@ function translate(){
 	}
 }
 
-function setOptions(){
-	var checkbox = document.querySelector('[data-action="keep-order"]');
-
-	if(options.keep_order){
-		checkbox.checked = true;
+function loadServices(){
+	for(var i = 0; i < passwordManager.services.length; ++i){	
+		addServiceToSelect(passwordManager.services[i]);
+		addServiceToHTML(passwordManager.services[i]);
 	}
+}
 
-	checkbox.addEventListener('change', function(){
-		optionsKeepOrder(checkbox.checked, refreshList);
+function loadLogins(){
+	for(var i = 0; i < passwordManager.logins.length; ++i){	
+		addLoginToHTML(passwordManager.logins[i]);
+	}
+}
+
+function configureExportButton(){
+	var button = document.querySelector('[jt-export]');
+
+	button.setAttribute('download', 'dump.json');
+
+	button.addEventListener('click', function(e){
+		var dump = {
+			loings: passwordManager.logins,
+			services: passwordManager.services,
+			version: passwordManager.version
+		};
+
+	 	button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(dump)));
 	});
 }
 
-function addServicesToHTML(){
-	for(var service in services){	
-		addServiceToHTML(service);
-	}
-}
+/**************************************/
 
-function addLoginsToHTML(){
-	for(var index in logins){
-		addLoginToHTML(logins[index]);
-	}
-}
+function addServiceToSelect(service){
+	var element = document.createElement('option');
+	element.value = service.id;
+	element.text = service.name;
 
-function onSubmit(e){
-	e.preventDefault();
-
-	var service = document.querySelector("[name='service']").value;
-	var label = document.querySelector("[name='label']").value;
-	var username = document.querySelector("[name='username']").value;
-	var password = document.querySelector("[name='password']").value;
-
-	if(service.length > 0 && username.length > 0  && password.length > 0 ){
-		var login = {
-			service: service,
-			label: (label.length > 0 ? label : null),
-			username: username,
-			password: password
-		};
-		
-		addLogin(login);
-		refreshList();
-		document.querySelector("form").reset();
-	}
-}
-
-function onClick(e){
-	e.preventDefault();
-
-	if(confirm(chrome.i18n.getMessage('removeElement'))){
-		var login_id = this.getAttribute('data-login-id');
-
-		removeLoginById(login_id);
-		removeLoginByIdToHTML(login_id);
-	}
-}
-
-function onMove(e){
-	e.preventDefault();
-
-	var login_id = this.getAttribute('data-login-id');
-	var position = getLoginPosition(login_id);
-
-	if(this.getAttribute('data-action') == 'up'){
-		if(position > 0){
-			moveLoginToPosition(login_id, position - 1);
-		}
-	}
-	else{
-		if(position < logins.length - 1){
-			moveLoginToPosition(login_id, position + 1);
-		}
-	}
-
-	refreshList();
-}
-
-function refreshList(){
-	loginsList.innerHTML = '';
-	addLoginsToHTML();
+	servicesSelect.appendChild(element);	
 }
 
 function addServiceToHTML(service){
-	var element = document.createElement('option');
-	element.value = service;
-	element.innerHTML = service;
+	var label = service.name;
+
+	var element = document.createElement('div');
+	element.setAttribute('class', 'col-xs-6 col-md-3 jt-cell');
+	element.setAttribute('data-service-id', service.id);
+	element.innerHTML = "<span class=\"jt-remove glyphicon glyphicon-remove\"></span><img src='" + service.imageUrl + "' /><a>" + label + "</a>";
+	element.querySelector('.jt-remove').addEventListener('click', onClickOnServiceElement);
 
 	servicesList.appendChild(element);	
 }
 
 function addLoginToHTML(login){
-	var service = login.service;
-	var label = (login.label ? service + ' - ' + login.label : service);
+	var service = passwordManager.findServiceById(login.serviceId);
+	var label = (login.label ? service.name + ' - ' + login.label : service.name);
 
-	var element = document.createElement('li');
-	element.innerHTML = "<a class='label' data-login-id='" + login.id + "'><img src='img/" + service + ".png' />" + label + "</a> <a data-login-id='" + login.id + "' data-action='down'>-</a> <a data-login-id='" + login.id + "' data-action='up'>+</a>";
-
-	element.querySelector('a[data-login-id]').addEventListener('click', onClick);
-	element.querySelector('a[data-action="down"]').addEventListener('click', onMove);
-	element.querySelector('a[data-action="up"]').addEventListener('click', onMove);
+	var element = document.createElement('div');
+	element.setAttribute('class', 'col-xs-6 col-md-3 jt-cell');
+	element.setAttribute('data-login-id', service.id);
+	element.innerHTML = "<span class=\"jt-remove glyphicon glyphicon-remove\"></span><img src='" + service.imageUrl + "' /><a>" + label + "</a>";
+	element.querySelector('.jt-remove').addEventListener('click', onClickOnLoginElement);
 
 	loginsList.appendChild(element);	
 }
 
-function removeLoginByIdToHTML(login_id){
-	document.querySelector("a[data-login-id='" + login_id +"']").parentElement.remove();
+function removeLoginByIdFromHTML(loginId){
+	document.querySelector("[data-login-id='" + loginId +"']").remove();
+}
+
+function removeServiceByIdFromHTML(serviceId){
+	document.querySelector("option[value='" + serviceId +"']").remove();
+	document.querySelector("[data-service-id='" + serviceId +"']").remove();
+
+	refreshServiceList();
+	refreshLoginList();
+}
+
+function refreshLoginList(){
+	loginsList.innerHTML = '';
+	loadLogins();
+}
+
+function refreshServiceList(){
+	servicesList.innerHTML = '';
+	servicesSelect.innerHTML = '';
+	loadServices();
+}
+
+/**************************************/
+
+function onClickOnLoginElement(e){
+	e.preventDefault();
+
+	if(confirm(chrome.i18n.getMessage('removeElement'))){
+		var loginId = this.parentElement.getAttribute('data-login-id');
+
+		passwordManager.removeLoginById(loginId);
+		removeLoginByIdFromHTML(loginId);
+	}
+}
+
+function onClickOnServiceElement(e){
+	e.preventDefault();
+
+	if(confirm(chrome.i18n.getMessage('removeElement'))){
+		var serviceId = this.parentElement.getAttribute('data-service-id');
+
+		passwordManager.removeServiceById(serviceId);
+		removeServiceByIdFromHTML(serviceId);
+	}
+}
+
+/**************************************/
+
+function onSubmitService(e){
+	e.preventDefault();
+
+	var name = serviceForm.querySelector("[name='name']").value;
+	var url = serviceForm.querySelector("[name='url']").value;
+	var imageUrl = serviceForm.querySelector("[name='image_url']").value;
+	var usernameSelector = serviceForm.querySelector("[name='username_selector']").value;
+	var passwordSelector = serviceForm.querySelector("[name='password_selector']").value;
+	var submitSelector = serviceForm.querySelector("[name='submit_selector']").value;
+
+	if(
+		name.length > 0 &&
+		url.length > 0 &&
+		usernameSelector.length > 0 &&
+		passwordSelector.length > 0 &&
+		submitSelector.length > 0
+		){
+
+		var service = {
+			name: name,
+			url: url,
+			usernameSelector: usernameSelector,
+			passwordSelector: passwordSelector,
+			submitSelector: submitSelector,
+
+			imageUrl: (imageUrl.length > 0 ? imageUrl : "img/default_service.png")
+		};
+
+		passwordManager.addService(service);
+		refreshServiceList();
+		serviceForm.reset();
+	}
+}
+
+function onSubmitLogin(e){
+	e.preventDefault();
+
+	var serviceId = loginForm.querySelector("[name='service_id']").value;
+	var label = loginForm.querySelector("[name='label']").value;
+	var username = loginForm.querySelector("[name='username']").value;
+	var password = loginForm.querySelector("[name='password']").value;
+
+	if(serviceId.length > 0 && username.length > 0  && password.length > 0 ){
+		var login = {
+			serviceId: serviceId,
+			serviceName: passwordManager.findServiceById(serviceId).name,
+			label: (label.length > 0 ? label : null),
+			username: username,
+			password: password
+		};
+
+		passwordManager.addLogin(login);
+		refreshLoginList();
+		loginForm.reset();
+	}
 }
