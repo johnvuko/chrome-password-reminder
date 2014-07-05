@@ -3,8 +3,8 @@ a:focus {
 }
 
 body{
-	width: 250px;
-	margin: 4px 0;
+	width: 260px;
+	margin: 5px 0;
 
 	font-family: 'Helvetica';
 	font-size: 10.5pt;
@@ -20,7 +20,7 @@ ul{
 li, a{
 	height: 22px;
 	line-height: 22px;
-	width: 250px;
+	width: 260px;
 }
 
 a{

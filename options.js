@@ -30,6 +30,7 @@ function onDocumentLoaded(){
 	loadLogins();
 
 	configureExportButton();
+	configureImportButton();
 }
 
 /**************************************/
@@ -64,13 +65,48 @@ function configureExportButton(){
 
 	button.addEventListener('click', function(e){
 		var dump = {
-			loings: passwordManager.logins,
+			logins: passwordManager.logins,
 			services: passwordManager.services,
 			version: passwordManager.version
 		};
 
 	 	button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(dump)));
 	});
+}
+
+function configureImportButton(){
+	var handleFileUpload = function(e){
+		console.log("File uploading...");
+
+	    var reader = new FileReader();
+	    reader.onerror = function errorHandler() {
+			console.error('File upload error');
+		}
+		reader.onabort = function() {
+			console.error('File upload aborted');
+		};
+		reader.onloadend = function () {
+			console.log('File uploaded');
+
+			var json = JSON.parse(reader.result);
+
+			// Bug 1.2.0
+			if(json.loings){
+				json.logins = json.loings;
+			}
+
+			passwordManager.logins = json.logins;
+			passwordManager.services = json.services;
+			passwordManager.version = json.version;
+			passwordManager.save();
+
+			window.location.reload();
+		}
+
+		reader.readAsBinaryString(e.target.files[0]);
+    };
+
+	document.querySelector('[jt-import]').addEventListener('change', handleFileUpload);
 }
 
 /**************************************/
