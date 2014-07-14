@@ -10,6 +10,7 @@
 	"form_login_username": { "message": "Username*" },
 	"form_login_password": { "message": "Password*" },
 	"form_login_add": { "message": "Submit" },
+	"form_login_reset": { "message": "Cancel" },
 
 	"form_service_name": { "message": "Name*" },
 	"form_service_url": { "message": "URL*" },

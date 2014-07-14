@@ -10,6 +10,7 @@
 	"form_login_username": { "message": "Pseudo*" },
 	"form_login_password": { "message": "Mot de passe*" },
 	"form_login_add": { "message": "Ajouter cet identifiant" },
+	"form_login_reset": { "message": "Annuler" },
 
 	"form_service_name": { "message": "Nom du service*" },
 	"form_service_url": { "message": "URL*" },

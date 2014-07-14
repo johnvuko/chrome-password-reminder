@@ -16,6 +16,7 @@
 
 .jt-cell{
 	height: 130px;
+	cursor: pointer;
 }
 
 .jt-cell:hover{

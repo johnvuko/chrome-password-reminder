@@ -79,6 +79,8 @@
 						<div class="jt-form">
 
 							<form class="service-form">
+								<input type="hidden" name="id">
+
 								<div class="form-group">
 									<label jt-tr="form_service_name"></label>
 									<input class="form-control" type="text" name="name" placeholder="Ex: Facebook" required />
@@ -104,6 +106,7 @@
 									<input class="form-control" type="text" name="submit_selector" placeholder="Ex: input[type='submit']" required />
 								</div>
 
+								<button class="btn btn-default" type="reset" jt-tr="form_login_reset"></button>
 								<button class="btn btn-default pull-right" type="submit" jt-tr="form_service_add"></button>
 								<div class="clearfix"></div>
 
