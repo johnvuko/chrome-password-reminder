@@ -28,6 +28,8 @@
 	display: block;
 	height: 50px;
 	margin: 20px auto 10px auto;
+
+	max-width: 100%; /* Image can be to large */
 }
 
 .jt-cell a{

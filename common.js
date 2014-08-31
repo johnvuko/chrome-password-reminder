@@ -66,6 +66,14 @@ function JTPasswordManager(callback){
 			manager.migrationV130();
 		}
 
+		if(manager.version == 1.3){
+			manager.migrationV131();
+		}
+
+		if(manager.version == '1.3.1'){
+			manager.migrationV132();
+		}
+
 		manager.sortEntity('logins');
 		manager.sortEntity('services');
 
@@ -429,6 +437,38 @@ JTPasswordManager.prototype.migrationV130 = function(){
 	});
 
 	this.version = 1.3;
+	this._storage.set({
+		version: this.version
+	});
+};
+
+JTPasswordManager.prototype.migrationV131 = function(){
+	this.addService({
+		name: 'newrelic',
+		url: 'https://login.newrelic.com/login',
+		imageUrl: 'img/newrelic.png',
+		usernameSelector: 'input#login_email',
+		passwordSelector: 'input#login_password',
+		submitSelector: '#login_submit'
+	});
+
+	this.version = '1.3.1';
+	this._storage.set({
+		version: this.version
+	});
+};
+
+JTPasswordManager.prototype.migrationV132 = function(){
+	this.addService({
+		name: 'tumblr',
+		url: 'https://www.tumblr.com/login',
+		imageUrl: 'img/tumblr.png',
+		usernameSelector: 'input#signup_email',
+		passwordSelector: 'input#signup_password',
+		submitSelector: '#signup_forms_submit'
+	});
+
+	this.version = '1.3.2';
 	this._storage.set({
 		version: this.version
 	});
