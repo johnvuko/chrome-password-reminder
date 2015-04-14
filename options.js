@@ -150,7 +150,7 @@
 
 		var element = document.createElement('div');
 		element.setAttribute('class', 'col-xs-6 col-md-3 jt-cell');
-		element.setAttribute('data-login-id', service.id);
+		element.setAttribute('data-login-id', login.id);
 		element.innerHTML = '<span class="jt-remove glyphicon glyphicon-remove"></span><img src="' + service.imageUrl + '" /><a>' + label + '</a>';
 		element.querySelector('.jt-remove').addEventListener('click', onClickOnRemoveLoginElement);
 
