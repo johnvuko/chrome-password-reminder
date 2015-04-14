@@ -24,8 +24,8 @@ var tabIds = {};
 			var username = document.querySelector("' + service.usernameSelector.replace(/\"/g, '\'') + '");\
 			var password = document.querySelector("' + service.passwordSelector.replace(/\"/g, '\'') + '");\
 			var submit = document.querySelector("' + service.submitSelector.replace(/\"/g, '\'') + '");\
-			username.value = "' + escape(login.username) + '";\
-			password.value = "' + escape(login.password) + '";\
+			username.value = ' + JSON.stringify(login.username) + ';\
+			password.value = '+ JSON.stringify(login.password) + ';\
 			submit.click();\
 		})();';
 	}
