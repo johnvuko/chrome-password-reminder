@@ -90,6 +90,31 @@ function JTPasswordManager(callback){
 /**************************************/
 
 JTPasswordManager.prototype.save = function(){
+	this.logins = this.logins.sort(function(a ,b){
+		if(!a.label){
+			a.label = "";
+		}
+		if(!b.label){
+			b.label = "";
+		}
+
+		var aName = a.serviceName;
+		var bName = b.serviceName;
+
+		if(a.label.length > 0){
+			aName += " - " + a.label;
+		}
+		if(b.label.length > 0){
+			bName += " - " + b.label;
+		}
+
+		return aName - bName;
+	});
+
+	this.services = this.services.sort(function(a ,b){
+		return a.name - b.name;
+	});
+
 	this._storage.set({
 		'logins': this.logins,
 		'services': this.services,
