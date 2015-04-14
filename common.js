@@ -74,6 +74,10 @@ function JTPasswordManager(callback){
 			manager.migrationV132();
 		}
 
+		if(manager.version == '1.3.2'){
+			manager.migrationV133();
+		}
+
 		manager.sortEntity('logins');
 		manager.sortEntity('services');
 
@@ -470,6 +474,20 @@ JTPasswordManager.prototype.migrationV132 = function(){
 
 	this.version = '1.3.2';
 	this._storage.set({
+		version: this.version
+	});
+};
+
+JTPasswordManager.prototype.migrationV133 = function(){
+	var ovh = this.findEntityBy('services', 'name', 'ovh')[0];
+	ovh['url'] = 'https://www.ovh.com/manager/web/login/';
+	ovh['usernameSelector'] = 'input[type="text"]';
+	ovh['passwordSelector'] = 'input[type="password"]';
+	ovh['submitSelector'] = 'button[type="submit"]';
+
+	this.version = '1.3.3';
+	this._storage.set({
+		services: this.services,
 		version: this.version
 	});
 };
